@@ -1,0 +1,22 @@
+{
+  "name": "word-guess-command-line-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MR-Stan/Word-Guess-Command-Line-Game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MR-Stan/Word-Guess-Command-Line-Game/issues"
+  },
+  "homepage": "https://github.com/MR-Stan/Word-Guess-Command-Line-Game#readme",
+  "dependencies": {
+    "inquirer": "^7.0.0"
+  }
+}
