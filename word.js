@@ -15,8 +15,8 @@ function Word(word) {
             newLetter = new Letter(letterArray[i]);
             // adds letters to array
             this.letters.push(newLetter);
-            console.log(this.letters);
         }
+        // return newLetter ???
     }
     // takes a character as an argument and calls the guess function on each letter object
     this.makeGuess = (guess) => {
@@ -26,12 +26,12 @@ function Word(word) {
         });
     }
 
-    this.update = () => {
-        let printedWord = "";
+    this.updateDisplay = () => {
+        let displayedWord = "";
         this.letters.forEach(letter => {
-            printedWord += letter.getCharacter() + " ";
+            displayedWord += letter.getCharacter() + " ";
         });
-        return printedWord;
+        return displayedWord;
     }
 
 }

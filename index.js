@@ -71,10 +71,22 @@ playAgain() => {
 
 // is this in word.js?
 guess() => {
-    // inquirer prompt - pick a letter
-    // need to create new Letter and call letter.checkCaracter(w/e was picked)
-
+    let letterCheckArr = [];
+    inquirer.prompt([
+        {
+            name: "guess",
+            message: word.updateDisplay() + "\nPick a letter!"
+        }
+    ]).then(data => {
+        letter.checkCharacter(data.guess);
+        letterCheckArr.push(letter.getCharacter());
+    });
+    checkWin();
 }
 
+// check if won
+checkWin() => {
+
+}
 
 initialize();
