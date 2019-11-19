@@ -1,2 +1,17 @@
-// Randomly selects a word and uses the Word constructor to store it
-// Prompts the user for each guess and keeps track of the user's remaining guesses
+const Word = require("./word.js");
+const inquirer = require("inquirer");
+
+let choices = [
+    {
+        animals: [
+            "fish", "dog", "cat", "antelope", "squirrel",
+            "opossum", "turkey", "chicken", "cow", "beaver"
+        ],
+
+        foods: [
+            "pizza", "tacos", "asparagus", "steak", "shrimp",
+            "enchiladas", "spaghetti", "apples", "bananas"
+        ]
+    }
+]
+
