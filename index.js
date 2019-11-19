@@ -18,14 +18,19 @@ initialize() => {
     play();
 }
 
-// independent of times played
+// needs to be independent of times played
 play() => {
+    currentWord = false;
     if (chosenWords.length < wordsArr.length) {
         currentWord = findWord();
     }
     else {
         console.log("You've guessed all of the words!")
         playAgain();
+    }
+    if (currentWord) {
+        let localWord = new Word(currentWord);
+        localWord.splitString();
     }
 }
 
@@ -46,8 +51,30 @@ findWord() => {
     }
 }
 
+// 
 playAgain() => {
+    inquirer.prompt([
+        {
+            name: "replay",
+            type: "list",
+            message: "Play again?",
+            choices: ["Yes", "No"]
+        }
+    ]).then(data => {
+        if (data.replay === "Yes") {
+            initialize();
+        } else {
+            console.log("<('.')>");
+        }
+    });
+}
+
+// is this in word.js?
+guess() => {
+    // inquirer prompt - pick a letter
+    // need to create new Letter and call letter.checkCaracter(w/e was picked)
 
 }
 
 
+initialize();
