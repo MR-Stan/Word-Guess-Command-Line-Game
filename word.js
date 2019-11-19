@@ -7,7 +7,7 @@ function Word(word) {
     // array of letters in word
     this.letters = [];
     // returns a string representation of the word
-    this.splitString = function () {
+    this.splitString = () => {
         let newLetter = "";
         // splits word into array of letters in word
         let letterArray = this.word.split("");
@@ -19,14 +19,14 @@ function Word(word) {
         }
     }
     // takes a character as an argument and calls the guess function on each letter object
-    this.makeGuess = function (guess) {
+    this.makeGuess = (guess) => {
         // forEach letter in this.letters call checkCharacter(guess) method in letter file
         this.letters.forEach(letter => {
             letter.checkLetter(guess);
         });
     }
 
-    this.update = function () {
+    this.update = () => {
         let printedWord = "";
         this.letters.forEach(letter => {
             printedWord += letter.getCharacter() + " ";

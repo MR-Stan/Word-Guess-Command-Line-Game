@@ -6,7 +6,7 @@ function Letter(letter) {
     this.isGuessed = false;
     // returns underlying character if letter has been guessed
     // or underscore if not
-    this.getCharacter = function () {
+    this.getCharacter = () => {
         if (this.isGuessed) {
             return this.letter;
         }
@@ -16,7 +16,7 @@ function Letter(letter) {
     }
     // takes character as argument and checks it against the 
     // underlying character, updating the boolean if correct
-    this.checkCharacter = function (char) {
+    this.checkCharacter = (char) => {
         if (char === this.letter) {
             this.isGuessed = true;
         }
