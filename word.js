@@ -15,7 +15,6 @@ function Word(word) {
             newLetter = new Letter(letterArray[i]);
             // adds letters to array
             this.letters.push(newLetter);
-            console.log(newLetter);
         }
         // return newLetter ???
     }

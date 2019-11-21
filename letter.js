@@ -11,8 +11,11 @@ class Letter {
             if (this.isGuessed) {
                 return this.letter;
             }
-            else {
+            else if (!this.isGuess) {
                 return "_";
+            }
+            else {
+                console.log("Error");
             }
         }
         // takes character as argument and checks it against the 
@@ -20,6 +23,10 @@ class Letter {
         this.checkCharacter = function (char) {
             if (char === this.letter) {
                 this.isGuessed = true;
+                console.log("your guess matches")
+            }
+            else {
+                console.log("Your guess does not match");
             }
         }
     }

@@ -5,6 +5,7 @@ const inquirer = require("inquirer");
 let chosenWordsArr = [];
 let currentWord = "";
 let werd = "";
+let letterCheckArr = [];
 
 let wordsArr = [
     "fish", "dog", "cat", "antelope", "squirrel",
@@ -27,11 +28,10 @@ function play() {
         werd = new Word(currentWord);
         werd.splitString();
         guess();
-        
+
     }
     else if (!currentWord && chosenWordsArr.length < wordsArr.length) {
         currentWord = findWord();
-        console.log("Current Word: " + currentWord)
         play();
     }
     else {
@@ -46,12 +46,10 @@ function findWord() {
     // picks random word in words array
     let index = Math.floor(Math.random() * wordsArr.length);
     let newWord = wordsArr[index];
-    console.log("New word: " + newWord);
     // if the randomly selected word hasn't been chosen already
     if (chosenWordsArr.includes(newWord)) {
         // try again
-        //return findWord();
-        console.log(true);
+        return findWord();
     }
     else {
         // add the word to chosen words
@@ -80,25 +78,32 @@ function playAgain() {
     });
 }
 
-// is this in word.js?
+// 
 function guess() {
-    let letterCheckArr = [];
+    letterCheckArr = [];
     inquirer.prompt([
         {
+            type: "input",
             name: "guess",
             message: werd.updateDisplay() + "\nPick a letter!"
         }
     ]).then(data => {
-        letter.checkCharacter(data.guess);
-        console.log(data.guess);
-        letterCheckArr.push(letter.getCharacter());
+        werd.letters.forEach(letter => {
+            letter.checkCharacter(data.guess);
+            letterCheckArr.push(letter.getCharacter()); 
+        });
+        console.log(letterCheckArr);
+        checkWin();
     });
-    checkWin();
+
+
 }
 
 // check if won
 function checkWin() {
+    // wrong variable
     if (letterCheckArr.includes("_")) {
+        console.log("has blanks");
         guess();
     }
     else {
