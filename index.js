@@ -4,6 +4,7 @@ const inquirer = require("inquirer");
 // once a choice is made, push to chosen
 let chosenWordsArr = [];
 let currentWord = "";
+let werd = "";
 
 let wordsArr = [
     "fish", "dog", "cat", "antelope", "squirrel",
@@ -23,8 +24,8 @@ function initialize() {
 // needs to be independent of times played
 function play() {
     if (currentWord) {
-        let localWord = new Word(currentWord);
-        localWord.splitString();
+        werd = new Word(currentWord);
+        werd.splitString();
         guess();
         
     }
@@ -58,8 +59,6 @@ function findWord() {
         // current word is updated to newWord
         console.log("ChosenWordArr: " + chosenWordsArr);
         return newWord;
-
-
     }
 }
 
@@ -87,7 +86,7 @@ function guess() {
     inquirer.prompt([
         {
             name: "guess",
-            message: currentWord.updateDisplay() + "\nPick a letter!"
+            message: werd.updateDisplay() + "\nPick a letter!"
         }
     ]).then(data => {
         letter.checkCharacter(data.guess);
