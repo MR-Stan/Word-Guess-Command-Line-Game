@@ -2,7 +2,7 @@ const Word = require("./word.js");
 const inquirer = require("inquirer");
 
 // once a choice is made, push to chosen
-let chosenWords = [];
+let chosenWordsArr = [];
 let currentWord = "";
 
 let wordsArr = [
@@ -13,16 +13,17 @@ let wordsArr = [
 ];
 
 // first run
-initialize() => {
+function initialize() {
     console.log("Welcome! Press any letter key to being.");
     play();
 }
 
 // needs to be independent of times played
-play() => {
+function play() {
     currentWord = false;
-    if (chosenWords.length < wordsArr.length) {
+    if (chosenWordsArr.length < wordsArr.length) {
         currentWord = findWord();
+        console.log("Current Word: " + currentWord)
     }
     else {
         console.log("You've guessed all of the words!")
@@ -31,28 +32,34 @@ play() => {
     if (currentWord) {
         let localWord = new Word(currentWord);
         localWord.splitString();
+        play();
     }
 }
 
 // finds word that hasn't been picked yet
-findWord() => {
+function findWord() {
     // picks random word in words array
-    let newWord = wordsArr[Math.floor(Math.random() * wordsArr.length)];
+    let index = Math.floor(Math.random() * wordsArr.length);
+    let newWord = wordsArr[index];
+    console.log("New word: " + newWord);
     // if the randomly selected word hasn't been chosen already
-    if (!chosenWords.includes(newWord)) {
-        // add the word to chosen words
-        chosenWords.push(newWord);
-        // current word is updated to newWord
-        return newWord;
+    if (chosenWordsArr.includes(newWord)) {
+        // try again
+        //return findWord();
+        console.log(true);
     }
     else {
-        // try again
-        return findWord();
+        // add the word to chosen words
+        chosenWordsArr.push(newWord);
+        // current word is updated to newWord
+        return newWord;
+        console.log(false);
+
     }
 }
 
 // 
-playAgain() => {
+function playAgain() {
     inquirer.prompt([
         {
             name: "replay",
@@ -70,7 +77,7 @@ playAgain() => {
 }
 
 // is this in word.js?
-guess() => {
+function guess() {
     let letterCheckArr = [];
     inquirer.prompt([
         {
@@ -85,8 +92,13 @@ guess() => {
 }
 
 // check if won
-checkWin() => {
-
+function checkWin() {
+    if (letterCheckArr.includes("_")) {
+        guess();
+    }
+    else {
+        console.log("No blanks remaining");
+    }
 }
 
 initialize();
