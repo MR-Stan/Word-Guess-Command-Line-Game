@@ -16,7 +16,8 @@ let wordsArr = [
 
 // first run
 function initialize() {
-    console.log("Welcome! Press any letter key to being.");
+    console.log(chosenWordsArr);
+    console.log("Welcome!");
     play();
 }
 
@@ -25,10 +26,15 @@ function initialize() {
 // needs to be independent of times played
 function play() {
     if (currentWord) {
-        werd = new Word(currentWord);
-        werd.splitString();
-        guess();
-
+        if (currentWord === werd.word) {
+            currentWord = "";
+            play();
+        }
+        else {
+            werd = new Word(currentWord);
+            werd.splitString();
+            guess();
+        }
     }
     else if (!currentWord && chosenWordsArr.length < wordsArr.length) {
         currentWord = findWord();
@@ -71,7 +77,8 @@ function playAgain() {
         }
     ]).then(data => {
         if (data.replay === "Yes") {
-            initialize();
+            chosenWordsArr = [];
+            play();
         } else {
             console.log("<('.')>");
         }
@@ -90,9 +97,8 @@ function guess() {
     ]).then(data => {
         werd.letters.forEach(letter => {
             letter.checkCharacter(data.guess);
-            letterCheckArr.push(letter.getCharacter()); 
+            letterCheckArr.push(letter.getCharacter());
         });
-        console.log(letterCheckArr);
         checkWin();
     });
 
@@ -101,14 +107,11 @@ function guess() {
 
 // check if won
 function checkWin() {
-    // wrong variable
     if (letterCheckArr.includes("_")) {
-        console.log("has blanks");
         guess();
     }
     else {
-        // guessed the word
-        console.log("No blanks remaining");
+        console.log("Nice job! You guessed the word.")
         playAgain();
     }
 }

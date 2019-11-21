@@ -23,10 +23,6 @@ class Letter {
         this.checkCharacter = function (char) {
             if (char === this.letter) {
                 this.isGuessed = true;
-                console.log("your guess matches")
-            }
-            else {
-                console.log("Your guess does not match");
             }
         }
     }
