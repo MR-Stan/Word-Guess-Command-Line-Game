@@ -18,22 +18,26 @@ function initialize() {
     play();
 }
 
+
+
 // needs to be independent of times played
 function play() {
-    currentWord = false;
-    if (chosenWordsArr.length < wordsArr.length) {
+    if (currentWord) {
+        let localWord = new Word(currentWord);
+        localWord.splitString();
+        guess();
+        
+    }
+    else if (!currentWord && chosenWordsArr.length < wordsArr.length) {
         currentWord = findWord();
         console.log("Current Word: " + currentWord)
+        play();
     }
     else {
         console.log("You've guessed all of the words!")
         playAgain();
     }
-    if (currentWord) {
-        let localWord = new Word(currentWord);
-        localWord.splitString();
-        play();
-    }
+
 }
 
 // finds word that hasn't been picked yet
@@ -52,8 +56,9 @@ function findWord() {
         // add the word to chosen words
         chosenWordsArr.push(newWord);
         // current word is updated to newWord
+        console.log("ChosenWordArr: " + chosenWordsArr);
         return newWord;
-        console.log(false);
+
 
     }
 }
@@ -82,10 +87,11 @@ function guess() {
     inquirer.prompt([
         {
             name: "guess",
-            message: word.updateDisplay() + "\nPick a letter!"
+            message: currentWord.updateDisplay() + "\nPick a letter!"
         }
     ]).then(data => {
         letter.checkCharacter(data.guess);
+        console.log(data.guess);
         letterCheckArr.push(letter.getCharacter());
     });
     checkWin();
@@ -97,7 +103,9 @@ function checkWin() {
         guess();
     }
     else {
+        // guessed the word
         console.log("No blanks remaining");
+        playAgain();
     }
 }
 
