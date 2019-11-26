@@ -1,4 +1,4 @@
-// constructor
+
 class Letter {
     constructor(letter) {
         // stores character
